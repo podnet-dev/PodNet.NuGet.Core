@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>PodNet.Sdk</PackageId>
+    <Version>0.1.0-preview.1</Version>
+    <Authors>podNET Hungary, Gábor Szabó</Authors>
+    <Description>Shared MSBuild conventions for podNET projects.</Description>
+    <PackageTags>PodNet;MSBuild;SDK</PackageTags>
+    <PackageType>MSBuildSdk</PackageType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/podnet-dev/PodNet.NuGet.Core</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Sdk/Sdk.props;Sdk/Sdk.targets" Pack="true" PackagePath="Sdk/" />
+    <None Include="../../src/PodNet.NuGet.Core/build/icon.png;../../src/PodNet.NuGet.Core/build/SPONSORS.md" Pack="true" PackagePath="Sdk/" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,35 @@
+<Project>
+  <!-- Evaluated after project properties so explicit consumer values take precedence. -->
+  <PropertyGroup Condition="'$(IsPackable)' == 'true'">
+    <PodNetIncludeDefaultIcon Condition="'$(PodNetIncludeDefaultIcon)' == ''">true</PodNetIncludeDefaultIcon>
+    <PodNetIncludeDefaultReadmePath Condition="'$(PodNetIncludeDefaultReadmePath)' == ''">true</PodNetIncludeDefaultReadmePath>
+    <PodNetIncludeDefaultSponsorsFile Condition="'$(PodNetIncludeDefaultSponsorsFile)' == ''">true</PodNetIncludeDefaultSponsorsFile>
+    <Authors Condition="'$(Authors)' == ''">podNET Hungary, Gábor Szabó</Authors>
+    <Company Condition="'$(Company)' == ''">podNET Hungary</Company>
+    <Copyright Condition="'$(Copyright)' == '' And '$(PodNetCopyrightYear)' != ''">Copyright (c) $(PodNetCopyrightYear) podNET Hungary</Copyright>
+    <PackageReadmeFile Condition="'$(PackageReadmeFile)' == '' And '$(PodNetIncludeDefaultReadmePath)' == 'true'">README.md</PackageReadmeFile>
+    <PackageIcon Condition="'$(PackageIcon)' == '' And '$(PodNetIncludeDefaultIcon)' == 'true'">icon.png</PackageIcon>
+    <RepositoryType Condition="'$(RepositoryType)' == ''">git</RepositoryType>
+    <RepositoryUrl Condition="'$(RepositoryUrl)' == ''">https://github.com/podnet-dev/$(MSBuildProjectName)</RepositoryUrl>
+    <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">$(RepositoryUrl)</PackageProjectUrl>
+    <PackageReleaseNotes Condition="'$(PackageReleaseNotes)' == ''">$(RepositoryUrl)/releases</PackageReleaseNotes>
+    <PackageLicenseExpression Condition="'$(PackageLicenseExpression)' == ''">MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance Condition="'$(PackageRequireLicenseAcceptance)' == ''">false</PackageRequireLicenseAcceptance>
+    <IncludeSymbols Condition="'$(IncludeSymbols)' == ''">true</IncludeSymbols>
+    <IncludeSource Condition="'$(IncludeSource)' == ''">true</IncludeSource>
+    <EmbedAllSources Condition="'$(EmbedAllSources)' == ''">true</EmbedAllSources>
+    <GenerateDocumentationFile Condition="'$(GenerateDocumentationFile)' == ''">true</GenerateDocumentationFile>
+    <SymbolPackageFormat Condition="'$(SymbolPackageFormat)' == ''">snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+    <None Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="/" Condition="'$(PodNetIncludeDefaultIcon)' == 'true'" />
+    <None Include="$(MSBuildThisFileDirectory)SPONSORS.md" Pack="true" PackagePath="/" Condition="'$(PodNetIncludeDefaultSponsorsFile)' == 'true'" />
+    <None Include="$(PodNetRepositoryRoot)/README.md" Pack="true" PackagePath="/" Condition="'$(PodNetIncludeDefaultReadmePath)' == 'true'" />
+  </ItemGroup>
+  <Target Name="PodNetValidatePackage" BeforeTargets="GenerateNuspec" Condition="'$(IsPackable)' == 'true'">
+    <Error Condition="'$(Description)' == '' Or '$(Description)' == 'Package Description'" Text="Set the Description MSBuild property before packing." />
+    <Error Condition="'$(PackageTags)' == ''" Text="Set the PackageTags MSBuild property before packing." />
+    <Error Condition="'$(Configuration)' == 'Release' And '$(PodNetCopyrightYear)' == ''" Text="Set PodNetCopyrightYear in the consuming repository to the current UTC year before Release pack." />
+    <Error Condition="'$(Configuration)' == 'Release' And '$(PodNetCopyrightYear)' != '' And '$(PodNetCopyrightYear)' != '$([System.DateTime]::UtcNow.Year)'" Text="PodNetCopyrightYear '$(PodNetCopyrightYear)' is stale; set it to the current UTC year before Release pack." />
+  </Target>
+</Project>

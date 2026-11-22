@@ -1,0 +1,6 @@
+<Project>
+  <Import Project="Sdk.props" Sdk="PodNet.Sdk" />
+  <PropertyGroup>
+    <PodNetCopyrightYear>2026</PodNetCopyrightYear>
+  </PropertyGroup>
+</Project>

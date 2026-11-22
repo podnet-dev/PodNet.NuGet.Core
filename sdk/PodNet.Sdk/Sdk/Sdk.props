@@ -1,0 +1,19 @@
+<Project>
+  <!-- Import once from the consumer's Directory.Build.props, not as the project SDK. -->
+  <PropertyGroup>
+    <LangVersion Condition="'$(LangVersion)' == ''">15.0</LangVersion>
+    <Nullable Condition="'$(Nullable)' == ''">enable</Nullable>
+    <ImplicitUsings Condition="'$(ImplicitUsings)' == ''">enable</ImplicitUsings>
+    <UseArtifactsOutput Condition="'$(UseArtifactsOutput)' == ''">true</UseArtifactsOutput>
+    <IsPackable Condition="'$(IsPackable)' == ''">false</IsPackable>
+    <Authors Condition="'$(Authors)' == ''">podNET Hungary, Gábor Szabó</Authors>
+    <Company Condition="'$(Company)' == ''">podNET Hungary</Company>
+    <GenerateDocumentationFile Condition="'$(GenerateDocumentationFile)' == ''">true</GenerateDocumentationFile>
+    <PodNetRepositoryRoot Condition="'$(PodNetRepositoryRoot)' == ''">$([MSBuild]::GetDirectoryNameOfFileAbove('$(MSBuildProjectDirectory)', 'Directory.Build.props'))</PodNetRepositoryRoot>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TF_BUILD)' == 'true' Or '$(GITHUB_ACTIONS)' == 'true'">
+    <Deterministic Condition="'$(Deterministic)' == ''">true</Deterministic>
+    <DeterministicSourcePaths Condition="'$(DeterministicSourcePaths)' == ''">true</DeterministicSourcePaths>
+    <ContinuousIntegrationBuild Condition="'$(ContinuousIntegrationBuild)' == ''">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+</Project>

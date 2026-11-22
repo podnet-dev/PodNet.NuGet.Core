@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+    <LangVersion>14.0</LangVersion>
+    <Authors>Custom author</Authors>
+    <Company>Custom company</Company>
+    <Copyright>Custom copyright</Copyright>
+    <RepositoryUrl>https://example.org/custom</RepositoryUrl>
+    <IncludeSymbols>false</IncludeSymbols>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+</Project>
